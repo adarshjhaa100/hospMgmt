@@ -25,10 +25,12 @@ def deletePatient(request, id):
 def modifyPatient(request, id):
     if request.user.is_authenticated:
         obj = Patient.objects.get(id=id)
-        form = patientForm(request.POST or None, instance=obj)
-        if form.is_valid():
-            form.save()
-            return redirect("../")
+        if request.method == "POST":            
+            form = patientForm(request.POST,request.FILES,instance=obj)
+            if form.is_valid():
+                form.save()
+                return redirect("../")
+        form = patientForm(None,instance=obj)
         context = {"form": form, "obj": obj}
         return render(request, "patientApp/updatePatient.html", context)
     else:
@@ -50,12 +52,16 @@ def listPatient(request):
 
 def addPatient(request):
     if request.user.is_authenticated:
-        form = patientForm(request.POST or None)
-        print(request.user)
         querySet = Patient.objects.all()
-        if form.is_valid():
-            form.save()
-            form = patientForm()
+        print("hello world",request.method)
+        if request.method=="POST":
+            form = patientForm(request.POST,request.FILES)
+            # print(form)
+            if form.is_valid():
+                form.save()
+                form = patientForm()
+                return redirect ('../')
+        form = patientForm(None)
         context = {
             "form": form,
             "objList": querySet,

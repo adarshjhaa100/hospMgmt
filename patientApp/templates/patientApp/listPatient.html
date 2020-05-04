@@ -1,5 +1,6 @@
 {% extends 'patientApp/patientAppBase.html' %} {% block head %}
 <!-- <link rel="stylesheet" href="static/app.css"> -->
+{% load static %}
 <style>
   #tableDiv {
     height: 50vh;
@@ -33,6 +34,7 @@
           <th class='incWidth'>Address</th>
           <th>Phone Number</th>
           <th>Disease</th>
+          <th>Report uploaded by patient</th>
           <th class='incWidth'>Patient admission date</th>
           <th></th>
           <th></th>
@@ -49,6 +51,11 @@
         <td class='incWidth'>{{ obj.address }}</td>
         <td>{{ obj.phoneNumber }}</td>
         <td>{{ obj.disease }}</td>
+        <td>
+          <a href="{{ obj.patientImgReport.url }}" download="patientReportof{{ obj.id }}">
+          <img src="{{ obj.patientImgReport.url }}" alt="patientReport" width="104" height="142">
+        </a> 
+      </td>
         <td class='incWidth'>{{ obj.createdDate }}</td>
         <td>
           <button
