@@ -1,0 +1,81 @@
+{% extends 'patientApp/patientAppBase.html' %} {% block head %}
+<!-- <link rel="stylesheet" href="static/app.css"> -->
+<style>
+  #tableDiv {
+    height: 50vh;
+    overflow-y: scroll;
+  }
+
+  /* thead {
+        width: 100%;
+    } */
+
+  th {
+    top: 0;
+    position: sticky;
+  }
+  h1 {
+    margin: 2rem 0;
+  }
+</style>
+<title>Patient app</title>
+{% endblock %} {% block body %}
+<h1>Patient List</h1>
+<div class="container" id="tableDiv">
+  <table class="table">
+    <thead class="thead-dark">
+      <div class="imp">
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Aadhar Number</th>
+          <th>Blood Grp</th>
+          <th class='incWidth'>Address</th>
+          <th>Phone Number</th>
+          <th>Disease</th>
+          <th class='incWidth'>Patient admission date</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </div>
+    </thead>
+    <tbody>
+      {% for obj in objList %}
+      <tr>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.age }}</td>
+        <td>{{ obj.aadharNumber }}</td>
+        <td>{{ obj.bloodGrp }}</td>
+        <td class='incWidth'>{{ obj.address }}</td>
+        <td>{{ obj.phoneNumber }}</td>
+        <td>{{ obj.disease }}</td>
+        <td class='incWidth'>{{ obj.createdDate }}</td>
+        <td>
+          <button
+            onclick="location.href='modify/{{ obj.id }}'"
+            class="btn btn-primary"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            onclick="location.href='delete/{{ obj.id }}'"
+            class="btn btn-primary"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<form method="POST">
+  {% csrf_token %}
+  <button class="btn btn-primary" type="submit">
+    Add patient
+  </button>
+</form>
+
+{% endblock %}

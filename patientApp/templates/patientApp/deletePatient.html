@@ -1,0 +1,40 @@
+{% extends 'patientApp/patientAppBase.html' %}
+{% block head %}
+<style>
+    #base {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 88vh;
+    }
+
+    form {
+        width: 50vw;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container" id='base'>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <ul >
+                <li class='list-group-item'>Name:{{ obj.name }}</li>
+                <li class='list-group-item'>Age:{{ obj.age }}</li>
+                <li class='list-group-item'>Aadhar Number:{{ obj.aadharNumber }}</li>
+                <li class='list-group-item'>Blood Grp:{{ obj.bloodGrp }}</li>
+                <li class='list-group-item'>Address:{{ obj.address }}</li>
+                <li class='list-group-item'>Phone Number:{{ obj.phoneNumber }}</li>
+                <li class='list-group-item'>Disease:{{ obj.disease }}</li>
+                <li class='list-group-item'>Patient admission date:{{ obj.createdDate }}</li>
+            </ul>
+        </div>
+        <h5>Are you sure you want to delete the patient with these details?</h5>
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+
+</div>
+
+{% endblock %}
