@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superuser DashBoard</title>
+    <style>
+        
+        
+    </style>
 </head>
 
 <body>
@@ -18,11 +22,13 @@
     </span>
     <br>
     <p>List of users</p>
-    <table>
+    <table id='userlist'>
         {%for user in users%}
         <tbody>
             <tr>
                 <td>{{user.username}}</td>
+                <td><a href="{% url 'login:updateuser' name user.username  %}">Update</a></td>
+                <td><a href="{% url 'login:deleteuser' name user.username %}">Delete</a></td>
             </tr>
         </tbody>
         {%endfor%}

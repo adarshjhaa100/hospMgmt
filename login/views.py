@@ -28,7 +28,7 @@ def dashboard(request,uname):
             user.logged_in=False
             user.save()
             #important
-            return redirect('loginIndex')
+            return redirect('login:loginIndex')
         else:
             params=['username','password']
             rp=request.POST
@@ -50,4 +50,38 @@ def dashboard(request,uname):
         print('pahuch gya')
         return render(request,'login/superuserDash.html',{'name':uname,'users':users,'exist':False})    
     except myUser.DoesNotExist:
-        return redirect('loginIndex')
+        return redirect('login:loginIndex')
+
+def updateUser(request,mainuser,uname):
+    try:
+        user=myUser.objects.get(username=mainuser,logged_in=True)
+        users=myUser.objects.all()
+        print('pahuch gya')
+        a=myUser.objects.get(username=uname)
+        if request.method=='POST':
+            a.username=request.POST.get('username')
+            a.password=request.POST.get('password')
+            a.save()
+            if(mainuser==uname):
+                mainuser=a.username
+            return redirect(f'login:superuser',uname=mainuser)
+        return render(request,'login/userUpdate.html',{
+            'user': a.username,
+            'password':a.password
+        })
+    except myUser.DoesNotExist:
+        return redirect('login:loginIndex')    
+
+def deleteUser(request,mainuser,uname):
+    try:
+        user=myUser.objects.get(username=mainuser,logged_in=True)
+        users=myUser.objects.all()
+        print('pahuch gya')
+        a=myUser.objects.get(username=uname)
+        a.delete()
+        if(uname==mainuser):
+            return redirect('login:loginIndex')    
+        return redirect(f'login:superuser',uname=mainuser)
+    except myUser.DoesNotExist:
+        return redirect('login:loginIndex')    
+
