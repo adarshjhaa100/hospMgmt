@@ -21,6 +21,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("login.urls")),
     path("patient/", include("patientApp.urls")),
+    path("docMgmnt/",include("docManagement.urls"))
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,
