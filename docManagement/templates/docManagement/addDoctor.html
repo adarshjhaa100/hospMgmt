@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor</title>
+</head>
+<body>
+    <form action="" method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+        {%for field in docform%}
+        <tr><td>{{field.label_tag}}</td><td>{{field}}</td></tr>
+        {%endfor%}
+    </table>
+
+    <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
