@@ -6,10 +6,12 @@ from .views import (
     loginPatientApp,
     modifyPatient,
     deletePatient,
+    pdfViewer,
 )
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
+    path('pdfviewer/<int:id>',pdfViewer,name='pdfViewer'),
     path("details/delete/<int:id>", deletePatient, name="deletePatient"),
     path("details/modify/<int:id>", modifyPatient, name="modifyPatient"),
     path("", loginPatientApp, name="loginPatientApp"),

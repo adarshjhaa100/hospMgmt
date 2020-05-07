@@ -52,8 +52,9 @@
         <td>{{ obj.phoneNumber }}</td>
         <td>{{ obj.disease }}</td>
         <td>
-          <a href="{{ obj.patientImgReport.url }}" download="patientReportof{{ obj.id }}">
-          <img src="{{ obj.patientImgReport.url }}" alt="patientReport" width="104" height="142">
+          <a href="{{ obj.patientImgReport.url }}" target='_blank'>
+          <img src="{% static 'patientApp/pdfIcon.png' %}" alt="patientReport" width="50" height="65">
+          Download Your report.
         </a> 
       </td>
         <td class='incWidth'>{{ obj.createdDate }}</td>

@@ -4,10 +4,20 @@ from .models import Patient
 from .forms import patientForm, userForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.conf import settings
 
 # Create your views here.
 def welcome(request):
     return HttpResponse("Welcome to patient app")
+
+def pdfViewer(request,id):
+    obj = Patient.objects.get(id=id)
+    path = settings.MEDIA_ROOT
+    context={
+        'obj':obj,
+        'path':path
+    }
+    return render(request,'patientApp/pdfViewer.html',context)
 
 
 def deletePatient(request, id):
