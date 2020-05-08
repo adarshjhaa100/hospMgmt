@@ -1,0 +1,103 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+.calendar{
+    width:80vw;
+    height:93vh;
+    margin:auto;
+    margin-top:1.5rem;
+    /* display: grid; */
+    /* border: 2px solid red; */
+}
+.month{
+    height:15vh;
+    /* border:2px solid black; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(145, 168, 231);
+    font-size: 2rem;
+    font-weight: bold;
+}
+.container{
+    /* margin:auto 0; */
+    height:8vh;
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: 8vh;
+}
+.calendarContainer{
+    height:70vh;
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+}
+.item{
+    margin:0.8rem;
+    /* color: white; */
+    background-color:rgb(232, 233, 255);
+    box-shadow: 0.2rem 0.2rem 5px black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.item:hover{
+    margin:0.6rem;
+    /* color: white; */
+    background-color:rgb(214, 215, 250);
+    /* border: 2px solid black; */
+}
+.weekday{
+    height:8vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(4, 7, 100);
+    color:azure;
+}
+.calendarMonth{
+    height:85vh;
+    display: grid;
+    margin:auto;
+    grid-template-columns: repeat(4,1fr);
+}
+.disabled{
+    display:none !important;
+}
+.year{
+    height:15vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(145, 168, 231);
+    font-size: 2rem;
+    font-weight: bold;
+}
+.calendarMonthContainer{            
+    width:85vw;
+    height:100vh;            
+    margin:auto;
+}
+.yearCalendar{
+    width:95vw;
+    height:100vh; 
+    display:grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    margin:auto;
+}
+.yearGrid{
+    padding:3rem;
+    /* border:2px solid black; */
+    display:grid;
+    grid-template-columns: repeat(6,1fr);
+}
+.movementIcons{
+    width:3.75rem;
+    height:2.5rem;
+}
+.movementIcons:hover{
+    width:4.0625rem;
+    height:2.8125rem;
+}
