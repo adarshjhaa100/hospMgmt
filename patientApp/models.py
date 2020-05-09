@@ -20,4 +20,5 @@ class Patient(models.Model):
 class Report(models.Model):
     patient=models.ForeignKey(Patient,on_delete=models.CASCADE)
     reportfile=models.FileField(upload_to='patientApp/')
-    dateCreated=models.DateField(auto_now=False)
+    reportType = models.CharField(max_length=200,default="ENT")
+    dateCreated=models.DateField(auto_now_add=True)

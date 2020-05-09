@@ -7,10 +7,14 @@ from .views import (
     modifyPatient,
     deletePatient,
     pdfViewer,
+    viewReport
 )
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
+    # Report URLS
+    path('viewReport/<int:id>',viewReport,name='viewReport'),
+    # Patient URLS    
     path('pdfviewer/<int:id>',pdfViewer,name='pdfViewer'),
     path("details/delete/<int:id>", deletePatient, name="deletePatient"),
     path("details/modify/<int:id>", modifyPatient, name="modifyPatient"),

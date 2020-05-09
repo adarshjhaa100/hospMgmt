@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Patient
+from .models import Patient,Report
 from .forms import patientForm, userForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -96,3 +96,12 @@ def loginPatientApp(request):
                 return HttpResponse("Unauthorized access")
     context = {"form": form}
     return render(request, "patientApp/login.html", context)
+
+def viewReport(request,id):
+    # print(Report.objects.filter(patient__pk=id))
+    context={
+        'reports':Report.objects.filter(patient__pk=id),
+        'patientName':Patient.objects.get(id=id).name
+    }
+    return render(request,'patientApp/viewReport.html',context)
+

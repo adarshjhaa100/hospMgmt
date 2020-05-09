@@ -1,0 +1,50 @@
+{% extends 'patientApp/patientAppBase.html' %} 
+{% load static %}
+{% block head %}
+<style>
+    #tableDiv {
+      height: 50vh;
+      overflow-y: scroll;
+    }
+  
+    /* thead {
+          width: 100%;
+      } */
+  
+    th {
+      top: 0;
+      position: sticky;
+    }
+    h1 {
+      margin: 2rem 0;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<br>
+<h2>{{ patientName }}</h2>
+<br>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <!-- <th>Patient</th> -->
+            <th>Report File</th>
+            <th>Report Type</th>
+            <th>Date Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+        <tr>
+            <!-- <td>{{ report.patient }}</td> -->
+            <td>
+                <!-- <img src="{% static 'patientApp/pdfIcon.png' %}" alt="patientReport" width="50" height="65"> -->
+                <a href="{{ report.reportfile.url }}" target='_blank'>Click to download report</a>
+            </td>
+            <td>{{ report.reportType }}</td>
+            <td>{{ report.dateCreated }}</td>
+        </tr>            
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
