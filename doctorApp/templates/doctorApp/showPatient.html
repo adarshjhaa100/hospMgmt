@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showpatient</title>
+</head>
+<body>
+        <ul>
+            <li>{{details.id}}</li>
+            <li>{{details.name}}</li>
+            <li>{{details.age}}</li>
+            <li>{{details.bloodGrp}}</li>
+            <li>{{details.disease}}</li>
+        </ul>
+        <p>
+            <a href="{%url 'docapp:docindex'%}">Goto patient lists
+            </a>
+        </p>
+        <p>Add report</p>
+        <a href="{% url 'docapp:addreport' details.id %}">Add</a>
+        <p>Reports</p>
+        {%for img in details.report_set.all%}
+        <p>{{img.dateCreated}}</p>
+        <a href="{{img.reportfile.url}}">{{img.reportfile}}</a>
+        {%endfor%}
+           
+</body>
+</html>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "login.apps.LoginConfig",
     "patientApp",
     "docManagement.apps.DocmanagementConfig",
+    "doctorApp.apps.DoctorappConfig"
     
 ]
 

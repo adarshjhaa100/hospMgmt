@@ -11,9 +11,13 @@ class Patient(models.Model):
     disease = models.CharField(max_length=15)
     createdDate = models.DateTimeField("Created", auto_now_add=True)
     modifiedDate = models.DateTimeField("Modified", auto_now=True)     
-    patientImgReport = models.FileField("Uploaded report",upload_to='patientApp/reportImages/',)
     def __repr__(self):
-        return "<Patient %s>" % self.id
+        return "<Patient %s>" % self.aadharNumber
 
     def __str__(self):
         return self.name
+
+class Report(models.Model):
+    patient=models.ForeignKey(Patient,on_delete=models.CASCADE)
+    reportfile=models.FileField(upload_to='patientApp/')
+    dateCreated=models.DateField(auto_now=False)

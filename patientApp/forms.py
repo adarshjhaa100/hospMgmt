@@ -34,7 +34,7 @@ class patientForm(forms.ModelForm):
             "address",
             "phoneNumber",
             "disease",
-            "patientImgReport",
+            # "patientImgReport",
             # "createdDate",
             # "modifiedDate",
         ]
