@@ -1,29 +1,21 @@
-{% extends 'patientApp/patientAppBase.html' %} 
-{% load static %}
-{% block head %}
+{% extends 'patientApp/patientAppBase.html' %} {% load static %} {% block head%}
 <style>
     #tableDiv {
-      height: 50vh;
-      overflow-y: scroll;
+        height: 50vh;
+        overflow-y: scroll;
     }
-  
-    /* thead {
-          width: 100%;
-      } */
-  
     th {
-      top: 0;
-      position: sticky;
+        top: 0;
+        position: sticky;
     }
     h1 {
-      margin: 2rem 0;
+        margin: 2rem 0;
     }
 </style>
-{% endblock %}
-{% block body %}
-<br>
+{% endblock %} {% block body %}
+<br />
 <h2>{{ patientName }}</h2>
-<br>
+<br />
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -31,6 +23,8 @@
             <th>Report File</th>
             <th>Report Type</th>
             <th>Date Created</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,12 +33,26 @@
             <!-- <td>{{ report.patient }}</td> -->
             <td>
                 <!-- <img src="{% static 'patientApp/pdfIcon.png' %}" alt="patientReport" width="50" height="65"> -->
-                <a href="{{ report.reportfile.url }}" target='_blank'>Click to download report</a>
+                <a href="{{ report.reportfile.url }}" target="_blank"
+                    >{{ report.reportfile.url }}</a
+                >
             </td>
             <td>{{ report.reportType }}</td>
             <td>{{ report.dateCreated }}</td>
-        </tr>            
+            <td>
+                <a
+                    href='{% url "patient:deleteReport" report.id %}'
+                    class="btn btn-primary"
+                >
+                    Delete Report
+                </a>
+            </td>
+            <td></td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
+<a href='{% url "patient:addReport" %}' class="btn btn-primary">
+    Add Report
+</a>
 {% endblock %}

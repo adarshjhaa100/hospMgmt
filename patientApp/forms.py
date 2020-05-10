@@ -1,5 +1,5 @@
 from django import forms
-from .models import Patient
+from .models import Patient,Report
 
 # from django.contrib.auth.models import User
 class patientForm(forms.ModelForm):
@@ -47,3 +47,23 @@ class userForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={"name": "password", "class": "form-control"})
     )
+
+class reportForm(forms.ModelForm):
+    class Meta:
+        model=Report
+        # DEPARTMENT_CHOICES =( 
+        #     ('Accident and emergency (A&E)','Accident and emergency (A&E)'), 
+        #     ('Admissions','Admissions'), 
+        #     ('Breast Screening','Breast Screening'), 
+        #     ('Burn Center','Burn Center'), 
+        #     ('Cardiology','Cardiology'), 
+        #     ('CSSD','Central Sterile Services Department (CSSD)'), 
+        #     ('Chaplaincy','Chaplaincy'), 
+        #     ('ENT','ENT')
+        # ) 
+        # reportType=forms.ChoiceField(choices = DEPARTMENT_CHOICES)
+        fields=[
+            'patient',
+            'reportfile',
+            'reportType'            
+        ]

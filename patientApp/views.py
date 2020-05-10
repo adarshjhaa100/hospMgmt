@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Patient,Report
-from .forms import patientForm, userForm
+from .forms import patientForm, userForm,reportForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.conf import settings
@@ -98,10 +98,35 @@ def loginPatientApp(request):
     return render(request, "patientApp/login.html", context)
 
 def viewReport(request,id):
-    # print(Report.objects.filter(patient__pk=id))
+    # print(Report.objects.filter(patient__pk=id)[0].patient)
     context={
         'reports':Report.objects.filter(patient__pk=id),
         'patientName':Patient.objects.get(id=id).name
     }
     return render(request,'patientApp/viewReport.html',context)
+
+def addReport(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = reportForm(request.POST, request.FILES)
+            print(form)
+            if form.is_valid():
+                form.save()
+                return redirect("patient:viewReport",Patient.objects.filter(name=form.cleaned_data['patient'])[0].id)
+        form = reportForm(None)
+        return render(request, "patientApp/addReport.html", {"form": form})
+    else:
+        return HttpResponse("Unauthorized access")
+
+def deleteReport(request,id):
+    if request.user.is_authenticated:
+        obj = Report.objects.get(id=id)
+        # print(Patient.objects.filter(name=obj.patient)[0].id)
+        if request.method == "POST":
+            obj.delete()
+            return redirect("patient:viewReport",Patient.objects.filter(name=obj.patient)[0].id)
+        context = {"report": obj}
+        return render(request, "patientApp/deleteReport.html", context)
+    else:
+        return HttpResponse("Unauthorized access")
 

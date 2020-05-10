@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container" id='base'>
+<br>
 	<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         {{ form.non_field_errors }}
@@ -28,8 +28,7 @@
         {% endfor %}
         <button type="submit" class="btn btn-primary">Update</button>
 	</form>
-
-</div>
+<br>
 <!-- <script>
     let a = new Date()
     createdDate = document.getElementById('id_createdDate');
