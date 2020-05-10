@@ -40,7 +40,7 @@ function calendarGridConstruction() {
         ).getDate();
     }
 
-    console.log(initialDate.getDay(), daysInMonth(initialDate));
+    // console.log(initialDate.getDay(), daysInMonth(initialDate));
 
     let calendar = document.querySelector(".calendarContainer");
     function calendarGridTable(start, numDays) {
@@ -83,7 +83,12 @@ function yearToMonth() {
             yearGrid.className += " disabled";
             let monthGrid = document.querySelector(".calendarMonthContainer");
             monthGrid.className = monthGrid.classList[0];
-            console.log("hello", year);
+            // console.log("hello", year);
+
+            let yearEle=document.querySelector('.year');
+            yearEle.innerText=year;
+            // console.log(yearEle);
+
             monthToCalendar(year);
         });
     });
@@ -97,6 +102,7 @@ function monthToCalendar(year) {
             // console.log(ele,month);
             let yearMonth=document.querySelector('.month');
             yearMonth.innerHTML=`${month} ${year}`;
+        
 
             let monthGrid = document.querySelector(".calendarMonthContainer");
             monthGrid.className += " disabled";            
