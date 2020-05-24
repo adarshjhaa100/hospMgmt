@@ -1,8 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .forms import DoctorForm
 from .models import Doctor
 # Create your views here.
+
+def index1(request):
+    return JsonResponse({
+        'a':'hello'
+    })
+
 
 def index(request):
 
@@ -28,7 +34,7 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 @xframe_options_sameorigin
 def showDoc(request):
-    D=Doctor.objects.all()
+    D=Doctor.objects.all().order_by('speciality')
     
     return render(request,"docManagement/showDoc.html",{
         'docList':D

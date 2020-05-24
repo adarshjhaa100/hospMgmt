@@ -8,6 +8,7 @@
 <body>
     {%for d in docList%}
     <p>{{d.name}}{{d.licenseNo}}</p>
+    <p>{{d.speciality}}</p>
     <!-- <a href="{{d.certificate.url}}">link</a> -->
     <a href="{{d.certificate.url}}"><img src="{{d.certificate.url}}" width="100px" height="200px" alt="Not Image"/>
     </a>

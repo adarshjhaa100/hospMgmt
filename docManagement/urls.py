@@ -6,6 +6,7 @@ app_name='docmgmnt'
 urlpatterns=[
     path('',views.index,name='loginIndex'),
     path('add/',views.addDoctor,name='addDoctor'),
-    path('showdoc/',views.showDoc,name='showDoc')
+    path('showdoc/',views.showDoc,name='showDoc'),
+    path('testjson/',views.index1)
     
 ]
