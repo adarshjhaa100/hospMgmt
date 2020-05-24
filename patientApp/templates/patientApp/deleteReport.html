@@ -1,0 +1,35 @@
+{% extends 'patientApp/patientAppBase.html' %} {% block head %}
+<style>
+    #base {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 88vh;
+    }
+
+    form {
+        width: 50vw;
+    }
+</style>
+{% endblock %} {% block body %}
+<div class="container" id="base">
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <ul>
+                <li class="list-group-item">{{ report.patient }}</li>
+                <li class="list-group-item">
+                    <a href="{{ report.reportfile.url }}" target="_blank"
+                        >{{ report.reportfile.url }}</a
+                    >
+                </li>
+                <li class="list-group-item">{{ report.reportType }}</li>
+                <li class="list-group-item">{{ report.dateCreated }}</li>
+            </ul>
+        </div>
+        <h5>Are you sure you want to delete the report with these details?</h5>
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+</div>
+
+{% endblock %}

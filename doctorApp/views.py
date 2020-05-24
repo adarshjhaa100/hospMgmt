@@ -4,6 +4,7 @@ from patientApp.models import Patient, Report
 from django.forms import inlineformset_factory
 from .forms import ReportForm
 from datetime import datetime
+
 # Create your views here.
 
 

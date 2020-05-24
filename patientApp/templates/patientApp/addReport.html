@@ -1,0 +1,20 @@
+{% extends 'patientApp/patientAppBase.html' %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <h1>Adding a new report</h1>
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field.errors }}
+            {{ field }}
+            {{ field.help_text }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+{% endblock %}
