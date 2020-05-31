@@ -17,7 +17,7 @@ def phoneValidate(ph):
 class Patient(models.Model):
     name = models.CharField('Patient Name',max_length=120)  # max-field required
     age = models.IntegerField('Age',validators=[ageValidate])
-    aadharNumber = models.CharField('Aadhar Number',max_length=12,validators=[aadharValidate])
+    aadharNumber = models.CharField('Aadhar Number',max_length=12,validators=[aadharValidate],unique=True)
     BLOOD_GRP=[
         ('O+','O+'),
         ('A+','A+'),
@@ -38,16 +38,7 @@ class Patient(models.Model):
     phoneNumber = models.CharField('Phone Number',max_length=15,validators=[phoneValidate])
     disease = models.CharField('Disease',max_length=30)
     createdDate = models.DateTimeField("Created", auto_now_add=True)
-    modifiedDate = models.DateTimeField("Modified", auto_now=True)     
-    def __repr__(self):
-        return "<Patient %s>" % self.aadharNumber
-
-    def __str__(self):
-        return self.name
-
-class Report(models.Model):
-    patient=models.ForeignKey(Patient,on_delete=models.CASCADE)
-    reportfile=models.FileField(upload_to='patientApp/')
+    modifiedDate = models.DateTimeField("Modified", auto_now=True)    
     DEPARTMENT_CHOICES =[ 
             ('Accident and emergency (A&E)','Accident and emergency (A&E)'), 
             ('Admissions','Admissions'), 
@@ -68,10 +59,24 @@ class Report(models.Model):
             ('Haematology','Haematology'),
             ('Health & Safety','Health & Safety'),
             ('ICU','Intensive Care Unit (ICU)'),
+            ('Dental','Dental'),
+            ('Opthalmologist','Opthalmologist')  
         ] 
-    reportType = models.CharField(
+    diseaseType = models.CharField(
         max_length=30,
         choices=DEPARTMENT_CHOICES,
         default='Accident and emergency (A&E)',
     )
+
+    def __repr__(self):
+        return "<Patient %s>" % self.aadharNumber
+
+    def __str__(self):
+        return self.name
+
+
+class Report(models.Model):
+    patient=models.ForeignKey(Patient,on_delete=models.CASCADE)
+    reportfile=models.FileField(upload_to='patientApp/')
+    
     dateCreated=models.DateField(auto_now_add=True)

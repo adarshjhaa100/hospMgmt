@@ -34,6 +34,7 @@ class patientForm(forms.ModelForm):
             "address",
             "phoneNumber",
             "disease",
+            "diseaseType"
             # "patientImgReport",
             # "createdDate",
             # "modifiedDate",
@@ -65,5 +66,5 @@ class reportForm(forms.ModelForm):
         fields=[
             'patient',
             'reportfile',
-            'reportType'            
+                        
         ]

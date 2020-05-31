@@ -5,6 +5,7 @@ from .forms import patientForm, userForm,reportForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.conf import settings
+from docManagement.models import Doctor,PatientId
 
 # Create your views here.
 def welcome(request):
@@ -19,12 +20,17 @@ def pdfViewer(request,id):
     }
     return render(request,'patientApp/pdfViewer.html',context)
 
+def deletefromDoc(id):
+    p=PatientId.objects.get(pid=id)
+    print(p)
+    p.delete()
 
 def deletePatient(request, id):
     if request.user.is_authenticated:
         obj = Patient.objects.get(id=id)
         if request.method == "POST":
             obj.delete()
+            deletefromDoc(id)
             return redirect("../")
         context = {"obj": obj}
         return render(request, "patientApp/deletePatient.html", context)
@@ -59,7 +65,20 @@ def listPatient(request):
     else:
         return HttpResponse("Unauthorized access")
 
+#function to assign patient to doctor having least queue length
+def assignPatient(dList,pid):
+    mi=1000
+    did=-1
+    print(dList)
+    for doc in dList:
+        if(mi>doc.patientid_set.count()):
+            mi=doc.patientid_set.count()
+            did=doc.id
+    print(mi,did)
+    doc=Doctor.objects.get(pk=did)
+    doc.patientid_set.create(pid=pid)
 
+# 'name','aadharNumber'
 def addPatient(request):
     if request.user.is_authenticated:
         querySet = Patient.objects.all()
@@ -69,9 +88,15 @@ def addPatient(request):
             # print(form)
             if form.is_valid():
                 form.save()
-                form = patientForm()
-                return redirect ('../')
-        form = patientForm(None)
+                fd=form.cleaned_data
+                pat=Patient.objects.get(aadharNumber=fd['aadharNumber'])
+                dList=Doctor.objects.filter(speciality=fd['diseaseType'])
+                if(len(dList)>0):
+                    assignPatient(dList,pat.id)
+                    return redirect ('../')
+                else:
+                    return HttpResponse('doctor type Not availabe')
+        form = patientForm()
         context = {
             "form": form,
             "objList": querySet,
@@ -117,6 +142,7 @@ def addReport(request):
         return render(request, "patientApp/addReport.html", {"form": form})
     else:
         return HttpResponse("Unauthorized access")
+
 
 def deleteReport(request,id):
     if request.user.is_authenticated:

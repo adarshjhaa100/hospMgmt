@@ -14,11 +14,11 @@
             <li>{{details.disease}}</li>
         </ul>
         <p>
-            <a href="{%url 'docapp:docindex'%}">Goto patient lists
+            <a href="{%url 'docapp:docindex' docid %}">Goto patient lists
             </a>
         </p>
         <p>Add report</p>
-        <a href="{% url 'docapp:addreport' details.id %}">Add</a>
+        <a href="{% url 'docapp:addreport' details.id docid %}">Add</a>
         <p>Reports</p>
         {%for img in details.report_set.all%}
         <p>{{img.dateCreated}}</p>

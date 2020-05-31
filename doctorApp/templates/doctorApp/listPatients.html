@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>List Patients</title>
 </head>
 <body>
+    <p>Hello {{doc}}</p>
     <ul>
     {%for patient in patients%}
-    <a href="{% url 'docapp:showpatient' patient.id %}">{{patient.name}}</a>
+    <a href="{% url 'docapp:showpatient' patient.id doc.id %}">{{patient.name}}</a>
     <br>
     {%endfor%}
 </ul>
